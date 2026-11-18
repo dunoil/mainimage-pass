@@ -1,0 +1,46 @@
+{
+  "download_url": "/download/21a22e1a7718",
+  "job_id": "21a22e1a7718",
+  "results": [
+    {
+      "bg_method": "rembg",
+      "checks": [
+        {
+          "detail": "Product isolated via rembg; bounding box covers 31% of the original frame.",
+          "name": "Subject detected",
+          "status": "PASS"
+        },
+        {
+          "detail": "Output is 2000x2000px.",
+          "name": "Output resolution \u2265 2000px (longest side)",
+          "status": "PASS"
+        },
+        {
+          "detail": "All 8 edge/corner samples are pure white.",
+          "name": "Background pure white RGB(255,255,255)",
+          "status": "PASS"
+        },
+        {
+          "detail": "Delivered as .jpg (Amazon main images must be JPEG/JPG).",
+          "name": "Output format is JPEG",
+          "status": "PASS"
+        },
+        {
+          "detail": "Source is 900x900px (JPEG); upscaled to 2000px. Acceptable, but a 2000px+ original is sharper.",
+          "name": "Source resolution",
+          "status": "WARN"
+        },
+        {
+          "detail": "Product's longest side fills 85% of the frame (scaled to the 85% target, centered).",
+          "name": "Product fills frame (Amazon guideline \u226585%)",
+          "status": "PASS"
+        }
+      ],
+      "fill_pct": 85,
+      "output_name": "input_mug_beige_main_2000.jpg",
+      "overall": "PASS",
+      "source_name": "input_mug_beige.jpg",
+      "source_size": "900x900"
+    }
+  ]
+}

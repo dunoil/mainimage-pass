@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MainImage Pass — Amazon Main Image Compliance, Fixed Today</title>
+<meta name="description" content="Upload raw product photos, get Amazon-compliant main images on pure white at 2000px plus a preflight PASS/FAIL report. Suppressed listing? Get compliant today.">
+<style>
+  :root{--ink:#14202b;--mut:#5b6b7a;--brand:#ff7a1a;--brand2:#1a9e54;--line:#e4eaf0;--bg:#f7fafc}
+  *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  header{padding:18px 0;border-bottom:1px solid var(--line)} .logo{font-weight:800;font-size:1.25rem}
+  .logo span{color:var(--brand)}
+  .hero{padding:56px 0 30px;text-align:center}
+  .hero h1{font-size:2.6rem;line-height:1.12;margin:.2em 0}
+  .hero h1 em{color:var(--brand);font-style:normal}
+  .hero p{color:var(--mut);font-size:1.15rem;max-width:640px;margin:0 auto 24px}
+  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:700;padding:14px 30px;border-radius:999px;text-decoration:none;font-size:1.05rem}
+  /* Before / after visual — pure CSS shapes, no product photos */
+  .ba{display:flex;gap:18px;justify-content:center;align-items:stretch;margin:38px auto;max-width:760px;flex-wrap:wrap}
+  .ba .card{flex:1;min-width:260px;border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}
+  .ba .stage{height:210px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative}
+  .stage.before{background:linear-gradient(135deg,#e8dcc4,#d9c9a8)}
+  .stage.after{background:#fff;border:2px dashed #cfe3d6}
+  .mug{width:110px;height:120px;background:#2f7fc4;border-radius:14px 14px 22px 22px;position:relative;box-shadow:0 10px 18px rgba(0,0,0,.18)}
+  .mug::before{content:"";position:absolute;right:-30px;top:26px;width:42px;height:56px;border:11px solid #2f7fc4;border-left:none;border-radius:0 26px 26px 0}
+  .mug::after{content:"";position:absolute;left:14px;top:16px;width:26px;height:70px;background:rgba(255,255,255,.28);border-radius:12px}
+  .tag{position:absolute;top:10px;left:12px;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:999px;color:#fff}
+  .tag.bad{background:#d33}.tag.good{background:var(--brand2)}
+  .ba .lbl{text-align:center;color:var(--mut);margin-top:10px;font-size:.95rem}
+  .arrow{align-self:center;font-size:2rem;color:var(--brand);font-weight:800}
+  section{padding:44px 0} h2{font-size:1.8rem;text-align:center;margin:0 0 8px}
+  .sub{text-align:center;color:var(--mut);margin:0 auto 28px;max-width:600px}
+  /* Tool */
+  #tool{background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .drop{border:2px dashed #b9c9d6;border-radius:16px;background:#fff;padding:34px;text-align:center;cursor:pointer}
+  .drop.over{border-color:var(--brand);background:#fff7f0}
+  .drop input{display:none}
+  .btn{background:var(--ink);color:#fff;border:none;font-weight:700;padding:13px 28px;border-radius:999px;cursor:pointer;font-size:1rem}
+  .btn:disabled{opacity:.45;cursor:default}
+  #filelist{margin:14px 0;color:var(--mut);font-size:.95rem}
+  .result{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 18px;margin:12px 0;text-align:left}
+  .badge{color:#fff;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+  .b-PASS{background:var(--brand2)} .b-FAIL{background:#d33}
+  .chk{font-size:.92rem;margin:4px 0} .s-PASS{color:var(--brand2);font-weight:700}.s-WARN{color:#c78100;font-weight:700}.s-FAIL{color:#d33;font-weight:700}
+  .dl{display:none;margin-top:18px;background:var(--brand2)}
+  /* Pricing */
+  .plans{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+  .plan{flex:1;min-width:250px;max-width:330px;border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center}
+  .plan.hot{border:2px solid var(--brand);position:relative}
+  .plan .price{font-size:2.4rem;font-weight:800;margin:8px 0}
+  .plan ul{list-style:none;padding:0;color:var(--mut);line-height:1.9}
+  .hotbadge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:999px}
+  .buy{display:inline-block;margin-top:10px;background:var(--brand);color:#fff;font-weight:700;padding:12px 26px;border-radius:999px;text-decoration:none}
+  /* FAQ */
+  .faq{max-width:760px;margin:0 auto}
+  details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+  summary{font-weight:700;cursor:pointer}
+  footer{padding:28px 0;border-top:1px solid var(--line);color:var(--mut);text-align:center;font-size:.9rem}
+</style>
+<!-- SHIP_OR_DIE_TRACKER: paste before </head> -->
+</head>
+<body>
+<header><div class="wrap"><div class="logo">MainImage <span>Pass</span></div></div></header>
+
+<div class="hero wrap">
+  <h1>Suppressed listing?<br>Get your main image <em>compliant today.</em></h1>
+  <p>Upload raw product photos. We strip the background, place your product on pure white at 2000px, and check every Amazon main-image rule — with a PASS/FAIL preflight report for each photo.</p>
+  <a class="cta" href="#tool">Check my photos free &darr;</a>
+
+  <div class="ba">
+    <div class="card">
+      <div class="stage before"><span class="tag bad">SUPPRESSED</span><div class="mug"></div></div>
+      <div class="lbl">Raw photo — beige background, wrong size</div>
+    </div>
+    <div class="arrow">&rarr;</div>
+    <div class="card">
+      <div class="stage after"><span class="tag good">PASS</span><div class="mug"></div></div>
+      <div class="lbl">Pure white RGB(255,255,255) &middot; 2000px &middot; JPEG</div>
+    </div>
+  </div>
+</div>
+
+<section id="tool">
+  <div class="wrap">
+    <h2>Run the preflight</h2>
+    <p class="sub">Up to 10 JPG/PNG photos per listing. You get a ZIP with the fixed images and a full compliance report.</p>
+    <label class="drop" id="drop">
+      <strong>Drag &amp; drop photos here</strong><br>or click to choose files
+      <input type="file" id="files" accept=".jpg,.jpeg,.png" multiple>
+    </label>
+    <div id="filelist"></div>
+    <div style="text-align:center">
+      <button class="btn" id="go" disabled>Process my photos</button>
+      <a class="btn dl" id="dl" href="#">⬇ Download ZIP (images + report)</a>
+    </div>
+    <div id="results"></div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2>One payment. Back live today.</h2>
+    <p class="sub">Every day a main image stays suppressed is a day of zero sales on that listing. No subscription — pay once, per pack.</p>
+    <div class="plans">
+      <div class="plan">
+        <h3>Single</h3><div class="price">$39</div>
+        <ul><li>1 listing</li><li>10 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
+        <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
+        <a class="buy" href="#" data-plan="single">Fix 1 listing — $39</a>
+      </div>
+      <div class="plan hot">
+        <div class="hotbadge">MOST POPULAR</div>
+        <h3>Bundle</h3><div class="price">$99</div>
+        <ul><li>5 listings</li><li>50 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
+        <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
+        <a class="buy" href="#" data-plan="bundle">Fix 5 listings — $99</a>
+      </div>
+      <div class="plan">
+        <h3>Agency</h3><div class="price">$199</div>
+        <ul><li>20 listings</li><li>200 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
+        <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
+        <a class="buy" href="#" data-plan="agency">Fix 20 listings — $199</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Amazon main image rules — FAQ</h2>
+    <div class="faq">
+      <details><summary>What background does Amazon require for the main image?</summary>
+        <p>Pure white: RGB 255, 255, 255. Off-white, cream, shadows, or studio gradients can get the image rejected or the listing suppressed in search. MainImage Pass composites onto exact pure white and samples the edges to prove it.</p></details>
+      <details><summary>How large must the image be?</summary>
+        <p>Amazon requires at least 500px on the longest side, and 2000px or more enables the zoom feature buyers expect. We deliver every image at 2000px on the longest side (square 2000×2000 canvas).</p></details>
+      <details><summary>Which file format should the main image be?</summary>
+        <p>JPEG (.jpg) is Amazon's preferred format for main images. Every file we deliver is a JPEG, whatever you uploaded.</p></details>
+      <details><summary>How much of the frame should the product fill?</summary>
+        <p>Amazon's guideline is that the product should fill 85% or more of the frame. We scale and center your product to an 85% frame fill and report the measured value.</p></details>
+      <details><summary>What else can get a main image rejected?</summary>
+        <p>Text, logos, watermarks, props, lifestyle scenes, borders, and additional products in the main image are all against the rules. Our preflight covers the technical rules automatically; the report reminds you to confirm these content rules yourself.</p></details>
+      <details><summary>My photo is small or blurry. Can you still fix it?</summary>
+        <p>We will process it and upscale to 2000px, but the report flags sources under 500px as FAIL and under 2000px as WARN — upscaling cannot invent detail. For best results, re-shoot at 2000px or larger.</p></details>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">MainImage Pass — built for Amazon sellers. Not affiliated with Amazon, Inc.</div></footer>
+
+<script>
+const drop = document.getElementById('drop'), input = document.getElementById('files'),
+      go = document.getElementById('go'), dl = document.getElementById('dl'),
+      list = document.getElementById('filelist'), results = document.getElementById('results');
+let chosen = [];
+function setFiles(fs){
+  chosen = [...fs].slice(0, 10);
+  list.textContent = chosen.length ? chosen.map(f => f.name).join('  ·  ') : '';
+  go.disabled = !chosen.length;
+}
+input.addEventListener('change', () => setFiles(input.files));
+['dragover','dragenter'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add('over'); }));
+['dragleave','drop'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', ev => setFiles(ev.dataTransfer.files));
+go.addEventListener('click', async () => {
+  go.disabled = true; go.textContent = 'Processing…'; results.innerHTML = ''; dl.style.display = 'none';
+  const fd = new FormData();
+  chosen.forEach(f => fd.append('photos', f));
+  try {
+    const res = await fetch('/api/process', { method: 'POST', body: fd });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Processing failed');
+    results.innerHTML = data.results.map(r => `
+      <div class="result">
+        <strong>${r.source_name}</strong> &rarr; ${r.output_name}
+        <span class="badge b-${r.overall}">${r.overall}</span>
+        ${r.checks.map(c => `<div class="chk"><span class="s-${c.status}">${c.status}</span> — ${c.name}: ${c.detail}</div>`).join('')}
+      </div>`).join('');
+    dl.href = data.download_url; dl.style.display = 'inline-block';
+  } catch (err) {
+    results.innerHTML = `<div class="result"><span class="s-FAIL">Error:</span> ${err.message}</div>`;
+  }
+  go.disabled = false; go.textContent = 'Process my photos';
+});
+</script>
+</body>
+</html>

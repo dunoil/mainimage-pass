@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>MainImage Pass — Preflight Compliance Report</title>
+<style>
+ body{font-family:system-ui,Arial,sans-serif;margin:2rem auto;max-width:860px;padding:0 1rem;color:#1a1a1a}
+ h1{font-size:1.5rem} .card{border:1px solid #ddd;border-radius:10px;padding:1rem 1.25rem;margin:1rem 0}
+ table{width:100%;border-collapse:collapse} td{padding:.4rem .5rem;border-top:1px solid #eee;vertical-align:top}
+ .badge{color:#fff;padding:.15rem .6rem;border-radius:999px;font-size:.8rem}
+ .b-pass{background:#1a9e54} .b-fail{background:#d33}
+ .s-pass{color:#1a9e54;font-weight:600} .s-warn{color:#c78100;font-weight:600} .s-fail{color:#d33;font-weight:600}
+ .meta{color:#666;font-size:.9rem}
+</style></head><body>
+<h1>MainImage Pass — Preflight Compliance Report</h1>
+<p>Generated 2026-11-18 08:13 UTC. <strong>1/1 image(s) PASS</strong> all
+critical Amazon main-image checks. Checks cover: pure-white background
+RGB(255,255,255), 2000px longest side for zoom, JPEG delivery, source
+resolution, and product frame fill (~85% guideline).</p>
+<p><em>Note: this is an automated preflight. Amazon's final acceptance also
+depends on content rules (no text, props, or lifestyle elements in the main
+image) that only you can confirm for your listing.</em></p>
+
+        <section class="card">
+          <h2>input_mug_beige.jpg &rarr; input_mug_beige_main_2000.jpg
+              <span class="badge b-pass">PASS</span></h2>
+          <p class="meta">Source size: 900x900 &middot;
+             Background removal: rembg &middot;
+             Frame fill: 85%</p>
+          <table><tr><td>Subject detected</td><td class='s-pass'>✅ PASS</td><td>Product isolated via rembg; bounding box covers 31% of the original frame.</td></tr><tr><td>Output resolution ≥ 2000px (longest side)</td><td class='s-pass'>✅ PASS</td><td>Output is 2000x2000px.</td></tr><tr><td>Background pure white RGB(255,255,255)</td><td class='s-pass'>✅ PASS</td><td>All 8 edge/corner samples are pure white.</td></tr><tr><td>Output format is JPEG</td><td class='s-pass'>✅ PASS</td><td>Delivered as .jpg (Amazon main images must be JPEG/JPG).</td></tr><tr><td>Source resolution</td><td class='s-warn'>⚠️ WARN</td><td>Source is 900x900px (JPEG); upscaled to 2000px. Acceptable, but a 2000px+ original is sharper.</td></tr><tr><td>Product fills frame (Amazon guideline ≥85%)</td><td class='s-pass'>✅ PASS</td><td>Product&#x27;s longest side fills 85% of the frame (scaled to the 85% target, centered).</td></tr></table>
+        </section>
+</body></html>
