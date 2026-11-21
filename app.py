@@ -3,6 +3,8 @@ Created 18 Nov 2026 for the Ship or Die $100K Hackathon (all code is new).
 
 Routes:
   GET  /                  landing page + upload tool (templates/index.html)
+  GET  /privacy           privacy policy (templates/privacy.html)
+  GET  /terms             terms of service (templates/terms.html)
   POST /api/process       multipart field "photos" (up to 10 JPG/PNG)
                           -> JSON {job_id, results:[...], download_url}
   GET  /download/<job_id> ZIP of processed images + report.html
@@ -34,6 +36,16 @@ JOBS = {}
 @app.get("/")
 def index():
     return render_template("index.html")
+
+
+@app.get("/privacy")
+def privacy():
+    return render_template("privacy.html")
+
+
+@app.get("/terms")
+def terms():
+    return render_template("terms.html")
 
 
 @app.post("/api/process")
