@@ -2,7 +2,7 @@
 
 Ready to paste. Everything below is based only on what the tool
 verifiably does today (verified end to end on 18 Nov 2026 and again on
-21 Nov 2026, see test-evidence/). Replace FINAL_URL with the real
+21 Nov 2026, see test-evidence/). Replace https://mainimagepass.site with the real
 public URL from DEPLOY.md Step 1 before using any of it.
 
 What the tool does, and nothing more:
@@ -63,6 +63,37 @@ no subscription. The report verifies technical main-image rules
 only; content rules such as no text, props, or lifestyle elements
 remain the seller's responsibility.
 
+### Product 4: MainImage Pass Done-For-You: 1 Listing, $49 one-time
+
+Live Creem product ID: prod_4X0VGq2B2VONjU27C5Apwc
+Payment link: https://www.creem.io/payment/prod_4X0VGq2B2VONjU27C5Apwc
+
+We do it for you. Send us the raw photos for one Amazon listing and a
+human checks every output by hand: a compliant main image on pure
+white (RGB 255,255,255), 2000x2000 JPEG, product centered, plus the
+full PASS/FAIL preflight report. Delivered by email as a ZIP within
+24 hours of receiving your photos. After checkout, email your photos
+to pasticairterusan@gmail.com from the same email you used to pay,
+with your product name in the subject. One-time payment, no
+subscription. Technical checks only; content rules stay the seller's
+responsibility.
+
+### Product 5: MainImage Pass Done-For-You: 5 Listings, $199 one-time
+
+Live Creem product ID: prod_3kRtSFmx6XZYttejho0Ks9
+Payment link: https://www.creem.io/payment/prod_3kRtSFmx6XZYttejho0Ks9
+
+We do it for you, five listings. Send us the raw photos for five
+Amazon listings and a human checks every output by hand: compliant
+main images on pure white (RGB 255,255,255), 2000x2000 JPEG, product
+centered, plus a PASS/FAIL preflight report for every photo.
+Delivered by email as a ZIP within 24 hours of receiving your
+photos. After checkout, email your photos to
+pasticairterusan@gmail.com from the same email you used to pay, with
+your product names in the subject. One-time payment, no
+subscription. Technical checks only; content rules stay the seller's
+responsibility.
+
 ## 2. TrustMRR startup listing
 
 Name: MainImage Pass
@@ -81,13 +112,13 @@ frame fill, source resolution). Pricing is one-time: $19 for 1
 listing, $49 for 5 listings, $99 for 20 listings. Built solo in
 November 2026 for the Ship or Die $100K Hackathon.
 
-Website: FINAL_URL
+Website: https://mainimagepass.site
 
 ## 3. X launch post (280 characters max)
 
-Post this text, with FINAL_URL replaced by the real URL:
+Post this text, with https://mainimagepass.site replaced by the real URL:
 
-Amazon main image got your listing suppressed? MainImage Pass turns raw product photos into compliant main images: pure white background (RGB 255,255,255), 2000px, plus a PASS/FAIL report for every photo. One-time price. FINAL_URL
+Amazon main image got your listing suppressed? MainImage Pass turns raw product photos into compliant main images: pure white background (RGB 255,255,255), 2000px, plus a PASS/FAIL report for every photo. One-time price. https://mainimagepass.site
 
 ## 4. Community post for Amazon seller groups (case-study format)
 
@@ -137,4 +168,4 @@ photo through it and show you the report, free, in the replies.
 Feedback on the check list is welcome either way: what would you
 want a preflight report to catch before you re-upload?
 
-Tool: FINAL_URL
+Tool: https://mainimagepass.site

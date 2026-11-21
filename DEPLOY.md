@@ -149,3 +149,21 @@ Products go live only after business details + KYC + Creem review; then copy the
 - Still open: payout account (owner connects a wallet in Creem:
   Balance, Payout Account, Crypto wallets, Connect wallet; or bank
   wire). Does not block sales. Then organic promotion per LAUNCH-COPY.md.
+
+## Done-For-You fulfillment (added 21 Nov 2026)
+
+Live Creem products:
+- MainImage Pass Done-For-You: 1 Listing, $49, prod_4X0VGq2B2VONjU27C5Apwc,
+  https://www.creem.io/payment/prod_4X0VGq2B2VONjU27C5Apwc
+- MainImage Pass Done-For-You: 5 Listings, $199, prod_3kRtSFmx6XZYttejho0Ks9,
+  https://www.creem.io/payment/prod_3kRtSFmx6XZYttejho0Ks9
+
+Fulfillment steps on a sale:
+- On a Creem sale notification for one of these products, expect the
+  buyer's photos to arrive by email at pasticairterusan@gmail.com,
+  sent from the purchase email with the product name in the subject.
+- Process the photos with the same pipeline as the self-serve tool.
+- Manually inspect every output by hand before delivery (background
+  purity, edges, centering, frame fill, report results).
+- Reply to the buyer by email with the ZIP (processed outputs plus
+  report.html) within 24 hours of receiving the photos.
