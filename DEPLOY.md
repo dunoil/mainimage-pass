@@ -135,3 +135,17 @@ Products go live only after business details + KYC + Creem review; then copy the
 - Final domain is live: https://mainimagepass.site (Hostinger, $0.98 first year), DNS A @ to 216.24.57.1 and CNAME www to mainimage-pass.onrender.com, certificate issued by Render.
 - Landing page redesigned: fixed mobile dropzone, real before/after examples in static/examples/ (mug, sneakers, bottle, all genuine pipeline outputs), how-it-works and checks sections, per-listing pricing math.
 - Memory fix: Render free instance (512 MB) OOM-restarted on 21 Nov because rembg's default session peaks around 530 MB. processing.py now runs the bundled models/u2netp.onnx through a lean onnxruntime session (arena off, single thread), peak about 95 MB for the removal step, output verified identical to rembg on the test set. rembg remains as a fallback path. Working copies are capped at 1200px before removal.
+
+## Evening update 21 Nov 2026: store approved, TrustMRR connected, prices cut
+- Creem store review APPROVED 21 Nov evening (live payments on).
+- Live products created and checkout buttons wired (commits bf979c4, ef75539).
+- TrustMRR connected and verified BEFORE the first payment (anonymous
+  listing: trustmrr.com/startup/stealth-company-118; read-only Creem
+  API key named TrustMRR; revenue populates after the first sale).
+- PRICES CUT by owner decision 21 Nov: Single $19, Bundle $49,
+  Agency $99 (from $39/$99/$199). Creem prices edited in place, product
+  IDs unchanged; site copy, per-listing math and LAUNCH-COPY.md updated;
+  checkouts verified at $19.00/$49.00/$99.00 and live site verified.
+- Still open: payout account (owner connects a wallet in Creem:
+  Balance, Payout Account, Crypto wallets, Connect wallet; or bank
+  wire). Does not block sales. Then organic promotion per LAUNCH-COPY.md.
