@@ -39,15 +39,23 @@ Session key:
   is slow), and jobs are stored in memory only, so a restart or sleep
   loses pending download links. Both are accepted MVP limits.
 
-## Step 2: Create "My Startup" in the Ship or Die dashboard [SESSION]
+## Step 2: Create "My Startup" in the Ship or Die dashboard [DONE 21 Nov 2026]
 
-- Needs Duan's logged-in Ship or Die session (Contestant #1560).
-- Create the startup entry with the final public URL from Step 1 and
-  the name MainImage Pass.
-- Copy the traffic tracker snippet the dashboard provides. Keep it
-  ready for Step 3. Do not paste any other site's analytics code.
+- Created via the $100K Hackathon page's own contestant sign-in (the
+  main /login page is only for the paid crew membership and rejects
+  this email). Dashboard: ship-or-die.com/100k-hackathon/dashboard.
+- Startup saved: name MainImage Pass, website https://mainimagepass.site,
+  description from LAUNCH-COPY.md. Tracker snippet obtained:
+  verify.js with data-site 8f79410c55174a011b632261b77fbf5cc03532ea.
 
-## Step 3: Paste the tracker snippet BEFORE any traffic [VM]
+## Step 3: Paste the tracker snippet BEFORE any traffic [DONE 21 Nov 2026]
+
+- Snippet installed at the placeholder in templates/index.html
+  (commit 93d2e67), pushed, Render redeployed, and the verify.js
+  script confirmed present in the live page source at
+  https://mainimagepass.site. Dashboard registration check: a
+  verification visit was made the same evening; the dashboard status
+  is recorded in the daily log once confirmed.
 
 - Paste the snippet at the placeholder in templates/index.html, line 61:
   `<!-- SHIP_OR_DIE_TRACKER: paste before </head> -->`
