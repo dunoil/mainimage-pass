@@ -1,0 +1,8 @@
+[2026-11-21 09:01:37 +0000] [21879] [INFO] Starting gunicorn 27.0.1
+[2026-11-21 09:01:37 +0000] [21879] [INFO] Listening at: http://127.0.0.1:8123 (21879)
+[2026-11-21 09:01:37 +0000] [21879] [INFO] Using worker: gthread
+[2026-11-21 09:01:37 +0000] [21883] [INFO] Booting worker with pid: 21883
+[2026-11-21 09:01:37 +0000] [21879] [INFO] Control socket listening at /home/hatch/.gunicorn/gunicorn.ctl
+[2026-11-21 09:01:42 +0000] [21879] [INFO] Handling signal: term
+[2026-11-21 09:01:42 +0000] [21883] [INFO] Worker exiting (pid: 21883)
+[2026-11-21 09:01:42 +0000] [21879] [INFO] Shutting down: Master
