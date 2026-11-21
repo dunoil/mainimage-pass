@@ -116,3 +116,14 @@ Session key:
   the key has read permission; do not take payments while it is broken.
 - Render build failure: check the build log against requirements.txt;
   the exact same dependency set is verified working in the local venv.
+
+## Creem products (created 21 Nov 2026, test mode)
+- MainImage Pass Single, $39 one-time, prod_4iDJv9VSSeyAokLwrnbihY
+- MainImage Pass Bundle, $99 one-time, prod_5geJpBAVspTwRwummP1NQ2
+- MainImage Pass Agency, $199 one-time, prod_6KLsJqGDGIQfR6XMvfy4hj
+Products go live only after business details + KYC + Creem review; then copy the payment links into the CHECKOUT PLACEHOLDER buttons and create the live API key for TrustMRR.
+
+## Update 21 Nov 2026 evening: domain, redesign, memory fix
+- Final domain is live: https://mainimagepass.site (Hostinger, $0.98 first year), DNS A @ to 216.24.57.1 and CNAME www to mainimage-pass.onrender.com, certificate issued by Render.
+- Landing page redesigned: fixed mobile dropzone, real before/after examples in static/examples/ (mug, sneakers, bottle, all genuine pipeline outputs), how-it-works and checks sections, per-listing pricing math.
+- Memory fix: Render free instance (512 MB) OOM-restarted on 21 Nov because rembg's default session peaks around 530 MB. processing.py now runs the bundled models/u2netp.onnx through a lean onnxruntime session (arena off, single thread), peak about 95 MB for the removal step, output verified identical to rembg on the test set. rembg remains as a fallback path. Working copies are capped at 1200px before removal.

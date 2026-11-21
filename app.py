@@ -12,6 +12,7 @@ Routes:
 Run:  .venv/bin/python app.py   (port from env PORT, default 8000)
 """
 
+import gc
 import io
 import os
 import uuid
@@ -74,6 +75,7 @@ def api_process():
             r["source_name"] = f.filename
             results.append(r)
             zf.writestr(r["output_name"], r["output_bytes"])
+            gc.collect()
         report_html = build_report(results)
         zf.writestr("report.html", report_html)
 

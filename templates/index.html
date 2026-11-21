@@ -3,124 +3,241 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MainImage Pass — Amazon Main Image Compliance, Fixed Today</title>
-<meta name="description" content="Upload raw product photos, get Amazon-compliant main images on pure white at 2000px plus a preflight PASS/FAIL report. Suppressed listing? Get compliant today.">
+<title>MainImage Pass: Amazon Main Image Compliance, Fixed Today</title>
+<meta name="description" content="Upload raw product photos, get Amazon compliant main images on pure white at 2000px plus a preflight PASS/FAIL report for every photo.">
 <style>
-  :root{--ink:#14202b;--mut:#5b6b7a;--brand:#ff7a1a;--brand2:#1a9e54;--line:#e4eaf0;--bg:#f7fafc}
-  *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff}
+  :root{--ink:#14202b;--mut:#5b6b7a;--brand:#ff7a1a;--brand-d:#e05f00;--green:#1a9e54;--red:#d33;--line:#e4eaf0;--bg:#f7fafc;--card:#fff}
+  *{box-sizing:border-box}
+  html,body{overflow-x:hidden}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+  img{max-width:100%;display:block}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  header{padding:18px 0;border-bottom:1px solid var(--line)} .logo{font-weight:800;font-size:1.25rem}
+  /* Header */
+  header{position:sticky;top:0;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);z-index:10}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:12px}
+  .logo{font-weight:800;font-size:1.2rem;white-space:nowrap}
   .logo span{color:var(--brand)}
-  .hero{padding:56px 0 30px;text-align:center}
-  .hero h1{font-size:2.6rem;line-height:1.12;margin:.2em 0}
+  .hcta{background:var(--brand);color:#fff;font-weight:700;padding:10px 18px;border-radius:999px;text-decoration:none;font-size:.95rem;white-space:nowrap}
+  .hcta:hover{background:var(--brand-d)}
+  /* Hero */
+  .hero{padding:44px 0 10px;text-align:center}
+  .hero h1{font-size:clamp(1.9rem,6vw,2.7rem);line-height:1.14;margin:.1em 0 .35em}
   .hero h1 em{color:var(--brand);font-style:normal}
-  .hero p{color:var(--mut);font-size:1.15rem;max-width:640px;margin:0 auto 24px}
-  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:700;padding:14px 30px;border-radius:999px;text-decoration:none;font-size:1.05rem}
-  /* Before / after visual — pure CSS shapes, no product photos */
-  .ba{display:flex;gap:18px;justify-content:center;align-items:stretch;margin:38px auto;max-width:760px;flex-wrap:wrap}
-  .ba .card{flex:1;min-width:260px;border:1px solid var(--line);border-radius:16px;padding:18px;position:relative}
-  .ba .stage{height:210px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative}
-  .stage.before{background:linear-gradient(135deg,#e8dcc4,#d9c9a8)}
-  .stage.after{background:#fff;border:2px dashed #cfe3d6}
-  .mug{width:110px;height:120px;background:#2f7fc4;border-radius:14px 14px 22px 22px;position:relative;box-shadow:0 10px 18px rgba(0,0,0,.18)}
-  .mug::before{content:"";position:absolute;right:-30px;top:26px;width:42px;height:56px;border:11px solid #2f7fc4;border-left:none;border-radius:0 26px 26px 0}
-  .mug::after{content:"";position:absolute;left:14px;top:16px;width:26px;height:70px;background:rgba(255,255,255,.28);border-radius:12px}
-  .tag{position:absolute;top:10px;left:12px;font-size:.78rem;font-weight:700;padding:4px 10px;border-radius:999px;color:#fff}
-  .tag.bad{background:#d33}.tag.good{background:var(--brand2)}
-  .ba .lbl{text-align:center;color:var(--mut);margin-top:10px;font-size:.95rem}
-  .arrow{align-self:center;font-size:2rem;color:var(--brand);font-weight:800}
-  section{padding:44px 0} h2{font-size:1.8rem;text-align:center;margin:0 0 8px}
-  .sub{text-align:center;color:var(--mut);margin:0 auto 28px;max-width:600px}
+  .hero p{color:var(--mut);font-size:clamp(1rem,3.4vw,1.15rem);max-width:660px;margin:0 auto 22px}
+  .cta{display:inline-block;background:var(--brand);color:#fff;font-weight:700;padding:15px 32px;border-radius:999px;text-decoration:none;font-size:1.05rem;min-height:52px}
+  .cta:hover{background:var(--brand-d)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:20px auto 4px;max-width:760px}
+  .chip{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 13px;font-size:.86rem;font-weight:600;color:var(--ink)}
+  .chip b{color:var(--green)}
+  /* Before / after pair */
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .shot{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .shot img{width:100%;height:100%;object-fit:cover;aspect-ratio:1/1}
+  .shot .badge{position:absolute;top:10px;left:10px;font-size:.74rem;font-weight:800;padding:4px 11px;border-radius:999px;color:#fff;letter-spacing:.02em}
+  .badge.bad{background:var(--red)} .badge.good{background:var(--green)} .badge.plain{background:#7a8a99}
+  .cap{grid-column:1/-1;text-align:center;color:var(--mut);font-size:.93rem;margin-top:2px}
+  .cap b{color:var(--ink)}
+  .hero .pair{max-width:720px;margin:30px auto 6px}
+  /* Sections */
+  section{padding:46px 0}
+  h2{font-size:clamp(1.5rem,4.6vw,1.9rem);text-align:center;margin:0 0 8px;line-height:1.25}
+  .sub{text-align:center;color:var(--mut);margin:0 auto 30px;max-width:620px}
   /* Tool */
   #tool{background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .drop{border:2px dashed #b9c9d6;border-radius:16px;background:#fff;padding:34px;text-align:center;cursor:pointer}
+  .drop{display:block;border:2px dashed #aebfd0;border-radius:18px;background:#fff;padding:34px 20px 30px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+  .drop:hover{border-color:var(--brand)}
   .drop.over{border-color:var(--brand);background:#fff7f0}
+  .drop svg{width:44px;height:44px;margin:0 auto 10px;color:var(--brand)}
+  .drop strong{font-size:1.12rem;display:block;margin-bottom:4px}
+  .drop .hint{color:var(--mut);font-size:.93rem}
   .drop input{display:none}
-  .btn{background:var(--ink);color:#fff;border:none;font-weight:700;padding:13px 28px;border-radius:999px;cursor:pointer;font-size:1rem}
+  #filelist{margin:16px 0 4px;display:none}
+  #filelist .f{display:flex;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 13px;margin:6px 0;font-size:.92rem}
+  #filelist .f .n{overflow-wrap:anywhere}
+  #filelist .f .s{color:var(--mut);white-space:nowrap}
+  .actions{text-align:center;margin-top:14px}
+  .btn{background:var(--ink);color:#fff;border:none;font-weight:700;padding:14px 30px;border-radius:999px;cursor:pointer;font-size:1rem;min-height:50px;width:100%;max-width:420px}
   .btn:disabled{opacity:.45;cursor:default}
-  #filelist{margin:14px 0;color:var(--mut);font-size:.95rem}
-  .result{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 18px;margin:12px 0;text-align:left}
-  .badge{color:#fff;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
-  .b-PASS{background:var(--brand2)} .b-FAIL{background:#d33}
-  .chk{font-size:.92rem;margin:4px 0} .s-PASS{color:var(--brand2);font-weight:700}.s-WARN{color:#c78100;font-weight:700}.s-FAIL{color:#d33;font-weight:700}
-  .dl{display:none;margin-top:18px;background:var(--brand2)}
+  .dl{display:none;margin-top:14px;background:var(--green);color:#fff;font-weight:700;padding:14px 30px;border-radius:999px;text-decoration:none;min-height:50px;width:100%;max-width:420px;text-align:center}
+  .free-note{text-align:center;color:var(--mut);font-size:.9rem;margin-top:12px}
+  .result{border:1px solid var(--line);background:#fff;border-radius:12px;padding:14px 18px;margin:12px 0;text-align:left;overflow-wrap:anywhere}
+  .badge2{color:#fff;padding:2px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+  .b-PASS{background:var(--green)} .b-FAIL{background:var(--red)}
+  .chk{font-size:.92rem;margin:4px 0} .s-PASS{color:var(--green);font-weight:700}.s-WARN{color:#c78100;font-weight:700}.s-FAIL{color:var(--red);font-weight:700}
+  /* Examples */
+  .examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px}
+  .ex{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 2px 10px rgba(20,32,43,.04)}
+  .ex h3{margin:14px 0 4px;font-size:1.05rem;text-align:center}
+  .ex p{margin:0;text-align:center;color:var(--mut);font-size:.92rem}
+  .fineprint{text-align:center;color:var(--mut);font-size:.85rem;margin-top:22px}
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:920px;margin:0 auto}
+  .step{text-align:center;padding:8px 14px}
+  .num{width:46px;height:46px;border-radius:50%;background:var(--brand);color:#fff;font-weight:800;font-size:1.2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+  .step h3{margin:0 0 6px;font-size:1.05rem}
+  .step p{margin:0;color:var(--mut);font-size:.94rem}
+  /* Checks */
+  #checks{background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .check{display:flex;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+  .check .tick{color:var(--green);font-weight:800;font-size:1.15rem;line-height:1.4}
+  .check h3{margin:0 0 3px;font-size:1rem}
+  .check p{margin:0;color:var(--mut);font-size:.9rem}
   /* Pricing */
   .plans{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
-  .plan{flex:1;min-width:250px;max-width:330px;border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center}
-  .plan.hot{border:2px solid var(--brand);position:relative}
-  .plan .price{font-size:2.4rem;font-weight:800;margin:8px 0}
-  .plan ul{list-style:none;padding:0;color:var(--mut);line-height:1.9}
-  .hotbadge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:999px}
-  .buy{display:inline-block;margin-top:10px;background:var(--brand);color:#fff;font-weight:700;padding:12px 26px;border-radius:999px;text-decoration:none}
+  .plan{flex:1;min-width:250px;max-width:330px;border:1px solid var(--line);border-radius:18px;padding:28px 24px;text-align:center;background:#fff}
+  .plan.hot{border:2px solid var(--brand);position:relative;box-shadow:0 8px 24px rgba(255,122,26,.12)}
+  .plan .price{font-size:2.4rem;font-weight:800;margin:6px 0 0}
+  .plan .per{color:var(--mut);font-size:.92rem;margin-bottom:8px}
+  .plan ul{list-style:none;padding:0;color:var(--mut);line-height:1.9;margin:10px 0}
+  .hotbadge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--brand);color:#fff;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:999px;white-space:nowrap}
+  .buy{display:inline-block;margin-top:10px;background:var(--brand);color:#fff;font-weight:700;padding:13px 26px;border-radius:999px;text-decoration:none;min-height:48px}
+  .buy:hover{background:var(--brand-d)}
   /* FAQ */
   .faq{max-width:760px;margin:0 auto}
-  details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0}
+  details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin:10px 0;background:#fff}
   summary{font-weight:700;cursor:pointer}
+  details p{color:var(--mut)}
   footer{padding:28px 0;border-top:1px solid var(--line);color:var(--mut);text-align:center;font-size:.9rem}
+  footer a{color:var(--mut)}
+  @media (max-width:560px){
+    section{padding:36px 0}
+    .hero{padding:32px 0 6px}
+    .hcta{padding:9px 14px;font-size:.88rem}
+    .drop{padding:28px 14px 24px}
+  }
 </style>
 <!-- SHIP_OR_DIE_TRACKER: paste before </head> -->
 </head>
 <body>
-<header><div class="wrap"><div class="logo">MainImage <span>Pass</span></div></div></header>
+<header><div class="wrap bar"><div class="logo">MainImage <span>Pass</span></div><a class="hcta" href="#tool">Check my photos free</a></div></header>
 
 <div class="hero wrap">
   <h1>Suppressed listing?<br>Get your main image <em>compliant today.</em></h1>
-  <p>Upload raw product photos. We strip the background, place your product on pure white at 2000px, and check every Amazon main-image rule — with a PASS/FAIL preflight report for each photo.</p>
+  <p>Upload raw product photos. We strip the background, place your product on pure white at 2000px, and check every Amazon main image rule, with a PASS/FAIL preflight report for each photo.</p>
   <a class="cta" href="#tool">Check my photos free &darr;</a>
+  <div class="chips">
+    <span class="chip"><b>&#10003;</b> Pure white RGB(255,255,255)</span>
+    <span class="chip"><b>&#10003;</b> 2000 x 2000 JPEG</span>
+    <span class="chip"><b>&#10003;</b> Per photo PASS/FAIL report</span>
+    <span class="chip"><b>&#10003;</b> No subscription, pay once</span>
+  </div>
 
-  <div class="ba">
-    <div class="card">
-      <div class="stage before"><span class="tag bad">SUPPRESSED</span><div class="mug"></div></div>
-      <div class="lbl">Raw photo — beige background, wrong size</div>
-    </div>
-    <div class="arrow">&rarr;</div>
-    <div class="card">
-      <div class="stage after"><span class="tag good">PASS</span><div class="mug"></div></div>
-      <div class="lbl">Pure white RGB(255,255,255) &middot; 2000px &middot; JPEG</div>
-    </div>
+  <div class="pair">
+    <div class="shot"><img src="/static/examples/mug-before.jpg" alt="Raw seller photo of a blue mug on a beige background"><span class="badge bad">SUPPRESSED</span></div>
+    <div class="shot"><img src="/static/examples/mug-after.jpg" alt="The same mug processed onto a pure white background"><span class="badge good">PASS</span></div>
+    <div class="cap"><b>Before:</b> beige background, wrong size. &nbsp;<b>After:</b> pure white, 2000px, JPEG. A real output from this tool.</div>
   </div>
 </div>
 
 <section id="tool">
   <div class="wrap">
-    <h2>Run the preflight</h2>
-    <p class="sub">Up to 10 JPG/PNG photos per listing. You get a ZIP with the fixed images and a full compliance report.</p>
+    <h2>Run the free preflight</h2>
+    <p class="sub">Up to 10 JPG or PNG photos per listing. You get a ZIP with the fixed images and a full compliance report.</p>
     <label class="drop" id="drop">
-      <strong>Drag &amp; drop photos here</strong><br>or click to choose files
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
+      <strong>Drag and drop photos here</strong>
+      <span class="hint">or tap to choose files from your device</span>
       <input type="file" id="files" accept=".jpg,.jpeg,.png" multiple>
     </label>
     <div id="filelist"></div>
-    <div style="text-align:center">
+    <div class="actions">
       <button class="btn" id="go" disabled>Process my photos</button>
-      <a class="btn dl" id="dl" href="#">⬇ Download ZIP (images + report)</a>
+      <a class="dl" id="dl" href="#">Download ZIP (images + report)</a>
     </div>
+    <p class="free-note">The preflight is free: you see every check result for every photo.</p>
     <div id="results"></div>
+  </div>
+</section>
+
+<section id="examples">
+  <div class="wrap">
+    <h2>Real examples, real outputs</h2>
+    <p class="sub">Every pair below went through this exact tool. No studio, no reshoot: the same photo, fixed.</p>
+    <div class="examples">
+      <div class="ex">
+        <div class="pair">
+          <div class="shot"><img src="/static/examples/sneakers-before.jpg" alt="Running shoes photographed on a wooden floor" loading="lazy"><span class="badge plain">BEFORE</span></div>
+          <div class="shot"><img src="/static/examples/sneakers-after.jpg" alt="Running shoes on a pure white background after processing" loading="lazy"><span class="badge good">PASS</span></div>
+        </div>
+        <h3>Running shoes</h3>
+        <p>Shot on a scuffed wooden floor. Background removed, centered at 85% frame fill, delivered at 2000 x 2000.</p>
+      </div>
+      <div class="ex">
+        <div class="pair">
+          <div class="shot"><img src="/static/examples/bottle-before.jpg" alt="Serum bottle photographed on a bathroom counter" loading="lazy"><span class="badge plain">BEFORE</span></div>
+          <div class="shot"><img src="/static/examples/bottle-after.jpg" alt="Serum bottle on a pure white background after processing" loading="lazy"><span class="badge good">PASS</span></div>
+        </div>
+        <h3>Serum bottle</h3>
+        <p>Shot on a bathroom counter with towels and toiletries around it. Only the product stays, on exact pure white.</p>
+      </div>
+      <div class="ex">
+        <div class="pair">
+          <div class="shot"><img src="/static/examples/mug-before.jpg" alt="Blue mug photographed on a beige background" loading="lazy"><span class="badge plain">BEFORE</span></div>
+          <div class="shot"><img src="/static/examples/mug-after.jpg" alt="Blue mug on a pure white background after processing" loading="lazy"><span class="badge good">PASS</span></div>
+        </div>
+        <h3>Ceramic mug</h3>
+        <p>Beige backdrop and the wrong dimensions. Rebuilt on pure white RGB(255,255,255), verified by edge sampling.</p>
+      </div>
+    </div>
+    <p class="fineprint">Previews above are resized for the web. Delivered files are full 2000 x 2000 JPEG.</p>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="sub">From raw photo to compliant main image in three steps.</p>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Upload your photos</h3><p>Up to 10 JPG or PNG photos per listing, straight from your phone or computer.</p></div>
+      <div class="step"><div class="num">2</div><h3>We fix and check</h3><p>The background is removed, the product is centered on pure white at 2000px, and every technical rule is measured.</p></div>
+      <div class="step"><div class="num">3</div><h3>Download the ZIP</h3><p>Fixed images plus a report that shows, photo by photo, exactly what passed and what to reshoot.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="checks">
+  <div class="wrap">
+    <h2>What the preflight checks</h2>
+    <p class="sub">The same technical rules Amazon applies to every main image, measured on your photo, not guessed.</p>
+    <div class="checks">
+      <div class="check"><div class="tick">&#10003;</div><div><h3>Pure white background</h3><p>Edges and corners are sampled to prove the background is exactly RGB(255,255,255), not off-white.</p></div></div>
+      <div class="check"><div class="tick">&#10003;</div><div><h3>Zoom ready size</h3><p>Delivered at 2000 x 2000, the size that enables Amazon's zoom feature on the product page.</p></div></div>
+      <div class="check"><div class="tick">&#10003;</div><div><h3>JPEG format</h3><p>Every file is delivered as a JPEG, Amazon's preferred main image format, whatever you uploaded.</p></div></div>
+      <div class="check"><div class="tick">&#10003;</div><div><h3>85% frame fill</h3><p>Your product is scaled and centered to fill 85% of the frame, and the measured value is reported.</p></div></div>
+      <div class="check"><div class="tick">&#10003;</div><div><h3>Source quality verdict</h3><p>Small or soft originals are flagged honestly: under 500px fails, under 2000px warns, so you know when to reshoot.</p></div></div>
+      <div class="check"><div class="tick">&#10003;</div><div><h3>Content rule reminder</h3><p>The report reminds you to confirm the rules a computer cannot judge: no text, logos, props, or extra products.</p></div></div>
+    </div>
   </div>
 </section>
 
 <section id="pricing">
   <div class="wrap">
     <h2>One payment. Back live today.</h2>
-    <p class="sub">Every day a main image stays suppressed is a day of zero sales on that listing. No subscription — pay once, per pack.</p>
+    <p class="sub">Every day a main image stays suppressed is a day of zero sales on that listing. No subscription, pay once per pack.</p>
     <div class="plans">
       <div class="plan">
         <h3>Single</h3><div class="price">$39</div>
+        <div class="per">$39 per listing</div>
         <ul><li>1 listing</li><li>10 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
         <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
-        <a class="buy" href="#" data-plan="single">Fix 1 listing — $39</a>
+        <a class="buy" href="#" data-plan="single">Fix 1 listing, $39</a>
       </div>
       <div class="plan hot">
-        <div class="hotbadge">MOST POPULAR</div>
+        <div class="hotbadge">MOST POPULAR, SAVE 49%</div>
         <h3>Bundle</h3><div class="price">$99</div>
+        <div class="per">$19.80 per listing</div>
         <ul><li>5 listings</li><li>50 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
         <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
-        <a class="buy" href="#" data-plan="bundle">Fix 5 listings — $99</a>
+        <a class="buy" href="#" data-plan="bundle">Fix 5 listings, $99</a>
       </div>
       <div class="plan">
+        <div class="hotbadge" style="background:var(--ink)">SAVE 74%</div>
         <h3>Agency</h3><div class="price">$199</div>
+        <div class="per">$9.95 per listing</div>
         <ul><li>20 listings</li><li>200 photos processed</li><li>Preflight PASS/FAIL report</li><li>ZIP delivery</li></ul>
         <!-- CHECKOUT PLACEHOLDER: TO BE WIRED to Creem/Polar checkout URL before launch. Do not remove data-plan. -->
-        <a class="buy" href="#" data-plan="agency">Fix 20 listings — $199</a>
+        <a class="buy" href="#" data-plan="agency">Fix 20 listings, $199</a>
       </div>
     </div>
   </div>
@@ -128,12 +245,12 @@
 
 <section>
   <div class="wrap">
-    <h2>Amazon main image rules — FAQ</h2>
+    <h2>Amazon main image rules, FAQ</h2>
     <div class="faq">
       <details><summary>What background does Amazon require for the main image?</summary>
         <p>Pure white: RGB 255, 255, 255. Off-white, cream, shadows, or studio gradients can get the image rejected or the listing suppressed in search. MainImage Pass composites onto exact pure white and samples the edges to prove it.</p></details>
       <details><summary>How large must the image be?</summary>
-        <p>Amazon requires at least 500px on the longest side, and 2000px or more enables the zoom feature buyers expect. We deliver every image at 2000px on the longest side (square 2000×2000 canvas).</p></details>
+        <p>Amazon requires at least 500px on the longest side, and 2000px or more enables the zoom feature buyers expect. We deliver every image at 2000px on the longest side, on a square 2000 x 2000 canvas.</p></details>
       <details><summary>Which file format should the main image be?</summary>
         <p>JPEG (.jpg) is Amazon's preferred format for main images. Every file we deliver is a JPEG, whatever you uploaded.</p></details>
       <details><summary>How much of the frame should the product fill?</summary>
@@ -141,22 +258,30 @@
       <details><summary>What else can get a main image rejected?</summary>
         <p>Text, logos, watermarks, props, lifestyle scenes, borders, and additional products in the main image are all against the rules. Our preflight covers the technical rules automatically; the report reminds you to confirm these content rules yourself.</p></details>
       <details><summary>My photo is small or blurry. Can you still fix it?</summary>
-        <p>We will process it and upscale to 2000px, but the report flags sources under 500px as FAIL and under 2000px as WARN — upscaling cannot invent detail. For best results, re-shoot at 2000px or larger.</p></details>
+        <p>We will process it and upscale to 2000px, but the report flags sources under 500px as FAIL and under 2000px as WARN: upscaling cannot invent detail. For best results, reshoot at 2000px or larger.</p></details>
     </div>
   </div>
 </section>
 
-<footer><div class="wrap">MainImage Pass — built for Amazon sellers. Not affiliated with Amazon, Inc.<br>
-<a href="/privacy" style="color:var(--mut)">Privacy Policy</a> &middot; <a href="/terms" style="color:var(--mut)">Terms of Service</a></div></footer>
+<footer><div class="wrap">MainImage Pass, built for Amazon sellers. Not affiliated with Amazon, Inc.<br>
+<a href="/privacy">Privacy Policy</a> &middot; <a href="/terms">Terms of Service</a></div></footer>
 
 <script>
 const drop = document.getElementById('drop'), input = document.getElementById('files'),
       go = document.getElementById('go'), dl = document.getElementById('dl'),
       list = document.getElementById('filelist'), results = document.getElementById('results');
 let chosen = [];
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function fmtSize(b){ return b >= 1048576 ? (b/1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(b/1024)) + ' KB'; }
 function setFiles(fs){
   chosen = [...fs].slice(0, 10);
-  list.textContent = chosen.length ? chosen.map(f => f.name).join('  ·  ') : '';
+  if (chosen.length) {
+    list.style.display = 'block';
+    list.innerHTML = chosen.map(f => `<div class="f"><span class="n">${esc(f.name)}</span><span class="s">${fmtSize(f.size)}</span></div>`).join('');
+  } else {
+    list.style.display = 'none';
+    list.innerHTML = '';
+  }
   go.disabled = !chosen.length;
 }
 input.addEventListener('change', () => setFiles(input.files));
@@ -164,7 +289,7 @@ input.addEventListener('change', () => setFiles(input.files));
 ['dragleave','drop'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', ev => setFiles(ev.dataTransfer.files));
 go.addEventListener('click', async () => {
-  go.disabled = true; go.textContent = 'Processing…'; results.innerHTML = ''; dl.style.display = 'none';
+  go.disabled = true; go.textContent = 'Processing...'; results.innerHTML = ''; dl.style.display = 'none';
   const fd = new FormData();
   chosen.forEach(f => fd.append('photos', f));
   try {
@@ -173,13 +298,13 @@ go.addEventListener('click', async () => {
     if (!res.ok) throw new Error(data.error || 'Processing failed');
     results.innerHTML = data.results.map(r => `
       <div class="result">
-        <strong>${r.source_name}</strong> &rarr; ${r.output_name}
-        <span class="badge b-${r.overall}">${r.overall}</span>
-        ${r.checks.map(c => `<div class="chk"><span class="s-${c.status}">${c.status}</span> — ${c.name}: ${c.detail}</div>`).join('')}
+        <strong>${esc(r.source_name)}</strong> &rarr; ${esc(r.output_name)}
+        <span class="badge2 b-${r.overall}">${r.overall}</span>
+        ${r.checks.map(c => `<div class="chk"><span class="s-${c.status}">${c.status}</span>: ${esc(c.name)}, ${esc(c.detail)}</div>`).join('')}
       </div>`).join('');
     dl.href = data.download_url; dl.style.display = 'inline-block';
   } catch (err) {
-    results.innerHTML = `<div class="result"><span class="s-FAIL">Error:</span> ${err.message}</div>`;
+    results.innerHTML = `<div class="result"><span class="s-FAIL">Error:</span> ${esc(err.message)}</div>`;
   }
   go.disabled = false; go.textContent = 'Process my photos';
 });

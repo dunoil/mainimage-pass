@@ -4,9 +4,11 @@ Created 18 Nov 2026 for the Ship or Die $100K Hackathon (all code is new).
 
 Pipeline per image:
   1. Remove the background.
-     - PRIMARY PATH: rembg (u2netp ONNX model) — verified working in this VM.
-     - FALLBACK PATH: flood-fill from the four corners for near-uniform
-       backgrounds (used automatically if rembg is unavailable or errors).
+     - PRIMARY PATH: the bundled u2netp ONNX model through a lean
+       onnxruntime session (about 95 MB peak, fits the free hosting tier).
+     - FALLBACK PATHS: rembg's default session if the lean path is
+       unavailable, then flood-fill from the four corners for near-uniform
+       backgrounds.
   2. Composite the cut-out product onto pure white RGB(255, 255, 255).
   3. Place it, centered, on a square 2000x2000 canvas, scaled so the
      product's longest side fills ~85% of the frame (Amazon guideline).
@@ -22,6 +24,67 @@ from PIL import Image, ImageDraw
 CANVAS_SIZE = 2000          # Amazon zoom-friendly: longest side 2000px
 FRAME_FILL = 0.85           # product longest side = 85% of frame
 PURE_WHITE = (255, 255, 255)
+
+# ------------------------------------------------------------- lean ORT path
+# Primary path: run the bundled u2netp model through a lean onnxruntime
+# session (arena and mem pattern off, single thread). Measured on this
+# project: about 95 MB peak RSS for a full removal, versus about 530 MB
+# through rembg's default session, which exceeds the free hosting tier's
+# 512 MB limit and caused an out-of-memory restart on 21 Nov 2026.
+_LEAN_SESSION = None
+_LEAN_TRIED = False
+_MODEL_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "models", "u2netp.onnx")
+
+
+def _get_lean_session():
+    global _LEAN_SESSION, _LEAN_TRIED
+    if _LEAN_TRIED:
+        return _LEAN_SESSION
+    _LEAN_TRIED = True
+    try:
+        import onnxruntime as ort
+        if not os.path.exists(_MODEL_PATH):
+            return None
+        opts = ort.SessionOptions()
+        opts.intra_op_num_threads = 1
+        opts.inter_op_num_threads = 1
+        opts.enable_cpu_mem_arena = False
+        opts.enable_mem_pattern = False
+        _LEAN_SESSION = ort.InferenceSession(
+            _MODEL_PATH, sess_options=opts, providers=["CPUExecutionProvider"])
+    except Exception:
+        _LEAN_SESSION = None
+    return _LEAN_SESSION
+
+
+def _remove_bg_lean(img_rgba):
+    """u2netp inference replicating rembg's own preprocessing exactly
+    (LANCZOS resize, divide by image max, ImageNet mean/std, mask resized
+    back with LANCZOS), but through the lean session above."""
+    import numpy as np
+    session = _get_lean_session()
+    if session is None:
+        raise RuntimeError("lean session unavailable")
+    rgb = img_rgba.convert("RGB")
+    small = rgb.resize((320, 320), Image.LANCZOS)
+    arr = np.array(small).astype(np.float64)
+    arr = arr / max(float(np.max(arr)), 1e-6)
+    arr[:, :, 0] = (arr[:, :, 0] - 0.485) / 0.229
+    arr[:, :, 1] = (arr[:, :, 1] - 0.456) / 0.224
+    arr[:, :, 2] = (arr[:, :, 2] - 0.406) / 0.225
+    arr = arr.transpose(2, 0, 1)[None, :, :, :].astype(np.float32)
+    out = session.run(None, {session.get_inputs()[0].name: arr})
+    mask = out[0][:, 0, :, :]
+    span = float(np.max(mask) - np.min(mask))
+    mask = (mask - np.min(mask)) / (span if span > 1e-8 else 1.0)
+    mask = np.squeeze(mask)
+    alpha = Image.fromarray((mask.clip(0, 1) * 255).astype(np.uint8),
+                            mode="L").resize(rgb.size, Image.LANCZOS)
+    result = rgb.convert("RGBA")
+    result.putalpha(alpha)
+    return result
+
 
 # ---------------------------------------------------------------- rembg path
 _REMBG_SESSION = None
@@ -81,8 +144,17 @@ def _remove_bg_floodfill(img_rgba, thresh=36):
 
 
 def remove_background(img):
-    """Return (RGBA image with alpha cut-out, method_name)."""
+    """Return (RGBA image with alpha cut-out, method_name).
+
+    Order: lean u2netp session (low memory), rembg (fallback if the lean
+    path is unavailable), flood fill (last resort for uniform backgrounds).
+    """
     rgba = img.convert("RGBA")
+    if _get_lean_session() is not None:
+        try:
+            return _remove_bg_lean(rgba), "u2netp-lean"
+        except Exception:
+            pass
     session = _get_rembg_session()
     if session is not None:
         try:
@@ -118,7 +190,17 @@ def process_image(raw_bytes, filename):
     checks = []
 
     # -- background removal + subject detection
-    cut, method = remove_background(src)
+    # Memory guard: run removal on a working copy capped at 1200px on the
+    # longest side. The delivered canvas is fixed at 2000px with the subject
+    # scaled to 1700px, so the cap costs nothing visible, while peak RAM on
+    # very large phone photos drops several-fold (free-tier instance limit).
+    work = src
+    if max(src_w, src_h) > 1200:
+        ratio = 1200 / max(src_w, src_h)
+        work = src.resize((round(src_w * ratio), round(src_h * ratio)),
+                          Image.LANCZOS)
+    work_w, work_h = work.size
+    cut, method = remove_background(work)
     bbox = _trim_to_subject(cut)
     if bbox is None:
         checks.append({
@@ -129,7 +211,7 @@ def process_image(raw_bytes, filename):
         subject = Image.new("RGBA", (10, 10), (0, 0, 0, 0))
     else:
         subject = cut.crop(bbox)
-        coverage = subject.size[0] * subject.size[1] / (src_w * src_h) * 100
+        coverage = subject.size[0] * subject.size[1] / (work_w * work_h) * 100
         checks.append({
             "name": "Subject detected",
             "status": "PASS",
