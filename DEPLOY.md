@@ -160,7 +160,7 @@ Live Creem products:
 
 Fulfillment steps on a sale:
 - On a Creem sale notification for one of these products, expect the
-  buyer's photos to arrive by email at pasticairterusan@gmail.com,
+  buyer's photos to arrive by email at hello@mainimagepass.site,
   sent from the purchase email with the product name in the subject.
 - Process the photos with the same pipeline as the self-serve tool.
 - Manually inspect every output by hand before delivery (background

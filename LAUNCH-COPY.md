@@ -73,7 +73,7 @@ human checks every output by hand: a compliant main image on pure
 white (RGB 255,255,255), 2000x2000 JPEG, product centered, plus the
 full PASS/FAIL preflight report. Delivered by email as a ZIP within
 24 hours of receiving your photos. After checkout, email your photos
-to pasticairterusan@gmail.com from the same email you used to pay,
+to hello@mainimagepass.site from the same email you used to pay,
 with your product name in the subject. One-time payment, no
 subscription. Technical checks only; content rules stay the seller's
 responsibility.
@@ -89,7 +89,7 @@ main images on pure white (RGB 255,255,255), 2000x2000 JPEG, product
 centered, plus a PASS/FAIL preflight report for every photo.
 Delivered by email as a ZIP within 24 hours of receiving your
 photos. After checkout, email your photos to
-pasticairterusan@gmail.com from the same email you used to pay, with
+hello@mainimagepass.site from the same email you used to pay, with
 your product names in the subject. One-time payment, no
 subscription. Technical checks only; content rules stay the seller's
 responsibility.
