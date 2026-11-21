@@ -24,7 +24,7 @@ What the tool does, and nothing more:
 
 ## 1. Creem products
 
-### Product 1: MainImage Pass Single: 1 Listing (10 Photos), $39 one-time
+### Product 1: MainImage Pass Single: 1 Listing (10 Photos), $19 one-time
 
 MainImage Pass Single fixes the main images of one Amazon listing.
 Upload up to 10 raw product photos (JPG or PNG) and get back a ZIP
@@ -37,7 +37,7 @@ Amazon. One-time payment, no subscription. The report covers
 technical rules only; content rules such as no text or props in the
 main image remain your responsibility as the seller.
 
-### Product 2: MainImage Pass Bundle: 5 Listings, $99 one-time
+### Product 2: MainImage Pass Bundle: 5 Listings, $49 one-time
 
 MainImage Pass Bundle covers five Amazon listings, up to 10 photos
 per listing. Each listing gets the same treatment: background removal
@@ -50,7 +50,7 @@ no subscription. Built for sellers fixing a small catalog or
 relaunching suppressed listings. Technical checks only; content
 rules stay the seller's responsibility.
 
-### Product 3: MainImage Pass Agency: 20 Listings, $199 one-time
+### Product 3: MainImage Pass Agency: 20 Listings, $99 one-time
 
 MainImage Pass Agency covers twenty Amazon listings, up to 10 photos
 per listing, for agencies and high-volume sellers. Every photo is
@@ -77,8 +77,8 @@ with compliant versions: background removed and composited on pure
 white (RGB 255,255,255), 2000x2000 output, product centered in the
 frame, plus a per-image preflight report that marks each technical
 check PASS or FAIL (resolution, background purity, JPEG format,
-frame fill, source resolution). Pricing is one-time: $39 for 1
-listing, $99 for 5 listings, $199 for 20 listings. Built solo in
+frame fill, source resolution). Pricing is one-time: $19 for 1
+listing, $49 for 5 listings, $99 for 20 listings. Built solo in
 November 2026 for the Ship or Die $100K Hackathon.
 
 Website: FINAL_URL
@@ -129,8 +129,8 @@ elements, watermarks), so that part is still on us as sellers. Edge
 quality on fur, glass, or reflective products can also be weaker
 than a manual edit.
 
-Pricing, so nobody has to ask: one-time, $39 for 1 listing (10
-photos), $99 for 5 listings, $199 for 20 listings. No subscription.
+Pricing, so nobody has to ask: one-time, $19 for 1 listing (10
+photos), $49 for 5 listings, $99 for 20 listings. No subscription.
 
 If you have a suppressed listing right now, I am happy to run one
 photo through it and show you the report, free, in the replies.
